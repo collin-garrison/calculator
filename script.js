@@ -11,7 +11,8 @@ function operate (numArray, operator) {
             return num1 * num2;
         case "/":
             if (num2 !== 0) {
-                return num1 / num2;
+                const answer = num1 / num2;
+                return Math.round(answer * 10000) / 10000;
             } else {
                 return undefined;
             }
