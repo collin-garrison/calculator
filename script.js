@@ -82,27 +82,29 @@ opButtons.forEach((button) => {
 const equals = document.querySelector("button.equals");
 equals.addEventListener("click", () => {
     // Add display number to numbers array
-    const displayNum = display.innerText;
-    if (numbers[0] === 0 && numbers.length === 1) {
-        numbers[0] = displayNum;
-    } else {
-        numbers.push(displayNum);
-    }
-    
-    // Display result
-    let result;
-    if (numbers.length === 2) {
-        result = operate(numbers, operator);
-        display.innerText = result;              
-    } else {
-        result = display.innerText;
-    }
-    numbers = [result];
+    if (operator) {
+        const displayNum = display.innerText;
+        if (numbers[0] === 0 && numbers.length === 1) {
+            numbers[0] = displayNum;
+        } else {
+            numbers.push(displayNum);
+        }
+        
+        // Display result
+        let result;
+        if (numbers.length === 2) {
+            result = operate(numbers, operator);
+            display.innerText = result;              
+        } else {
+            result = display.innerText;
+        }
+        numbers = [result];
 
-    const highlightedButton = document.querySelector("button.highlighted");
-    highlightedButton.classList.remove("highlighted");
-    operator = null;
-    opLastClick = true;
+        const highlightedButton = document.querySelector("button.highlighted");
+        highlightedButton.classList.remove("highlighted");
+        operator = null;
+        opLastClick = true;
+    }
 })
 
 const clear = document.querySelector("button.clear");
