@@ -44,16 +44,9 @@ numButtons.forEach((button) => {
     })
 })
 
-// const equals = document.querySelector("button.equals");
-// equals.addEventListener("click", () => {
-//     
-// })
-
 const opButtons = document.querySelectorAll("button.operand");
 opButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        console.log(`Before: ${numbers}`);
-
         if (!opLastClick) {
             // Add display number to numbers array
             const displayNum = display.innerText;
@@ -64,7 +57,6 @@ opButtons.forEach((button) => {
             }
 
             // Display result if there's two numbers in numbers array
-            console.log(numbers.length === 2)
             if (numbers.length === 2) {
                 let result = operate(numbers, operator);
                 display.innerText = result;
@@ -84,10 +76,21 @@ opButtons.forEach((button) => {
         }
 
         opLastClick = true;
-        console.log(`After: ${numbers}`);
     })
 })
 
+const equals = document.querySelector("button.equals");
+
+const clear = document.querySelector("button.clear");
+clear.addEventListener("click", () => {
+    display.innerText = "0";
+    numbers = [0];
+    operator = null;
+    opLastClick = false;
+    const highlightedButton = document.querySelector("button.highlighted");
+    highlightedButton.classList.remove("highlighted");
+})
+
 ```
-todo: equals, clear
+todo: equals
 ```
