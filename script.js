@@ -19,22 +19,30 @@ function operate (numArray, operator) {
 }
 
 const display = document.querySelector(".display");
+let operator;
+let numbers = [0];
+let opLastClick = false;
 
 const numButtons = document.querySelectorAll("button.num")
 numButtons.forEach((button) => {
     button.addEventListener("click", () => {
         // Add pressed number to display
+        if (opLastClick) {
+            display.innerText = "";
+        }
         const num = button.innerText;
         if (display.innerText === "0") {
             display.innerText = num;
         } else {
             display.innerText += num;
         }
+
+        // Store latest operator
+        operator = document.querySelector("button.highlighted").innerText;
+
+        opLastClick = false;
     })
 })
-
-let operator;
-let numbers = [0];
 
 // const equals = document.querySelector("button.equals");
 // equals.addEventListener("click", () => {
@@ -44,12 +52,24 @@ let numbers = [0];
 const opButtons = document.querySelectorAll("button.operand");
 opButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        // Add display number to numbers array
-        const displayNum = display.innerText;
-        if (numbers[0] === 0 && numbers.length === 1) {
-            numbers[0] = displayNum;
-        } else {
-            numbers.push(displayNum);
+        console.log(`Before: ${numbers}`);
+
+        if (!opLastClick) {
+            // Add display number to numbers array
+            const displayNum = display.innerText;
+            if (numbers[0] === 0 && numbers.length === 1) {
+                numbers[0] = displayNum;
+            } else {
+                numbers.push(displayNum);
+            }
+
+            // Display result if there's two numbers in numbers array
+            console.log(numbers.length === 2)
+            if (numbers.length === 2) {
+                let result = operate(numbers, operator);
+                display.innerText = result;
+                numbers = [result];
+            }
         }
 
         // Highlight latest clicked operator
@@ -62,15 +82,12 @@ opButtons.forEach((button) => {
             highlightedButton.classList.remove("highlighted");
             button.classList.add("highlighted");
         }
+
+        opLastClick = true;
+        console.log(`After: ${numbers}`);
     })
 })
 
 ```
-[2] [4] [+] [-] [3] [5] [*] [2] [=]
-- when each number is pressed, add it to display
-- when operand is pressed, add display number to numbers array (replace 0)
-highlight latest operand until a number is pressed, then store the operand
-when another operand is pressed, add display number to numbers array
-because there are now 2 numbers in array, operate on them and display it
-
+todo: equals, clear
 ```
