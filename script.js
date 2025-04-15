@@ -10,10 +10,10 @@ function operate (numArray, operator) {
         case "*":
             return num1 * num2;
         case "/":
-            if (num1 !== 0) {
+            if (num2 !== 0) {
                 return num1 / num2;
             } else {
-                return "Error";
+                return undefined;
             }
     } 
 }
@@ -114,7 +114,3 @@ clear.addEventListener("click", () => {
     const highlightedButton = document.querySelector("button.highlighted");
     highlightedButton.classList.remove("highlighted");
 })
-
-```
-todo: equals
-```
