@@ -11,7 +11,12 @@
 }
 
 .display {
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
+    text-align: right;
+    padding: 0 10px;
+    font-size: 100px;
     width: calc(100% - 30px);
     margin: 10px;
     flex: 1;
@@ -35,7 +40,8 @@
     margin: 0 6px;
     height: 24%;
     color: black;
-    font-size: 32px;
+    font-size: 40px;
+    border-radius: 10px;
 }
 
 .num {
@@ -44,4 +50,8 @@
 
 .operand {
     background-color: coral;
+}
+
+.clear {
+    background-color: #FF6060;
 }
