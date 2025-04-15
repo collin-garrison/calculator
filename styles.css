@@ -48,10 +48,15 @@
     background-color: cornflowerblue;
 }
 
-.operand {
+.operand,
+.equals {
     background-color: coral;
 }
 
 .clear {
     background-color: #FF6060;
+}
+
+button.highlighted {
+    background-color: rgb(255, 175, 146);
 }
