@@ -22,16 +22,21 @@ function operate (numArray, operator) {
 const display = document.querySelector(".display");
 let operator;
 let numbers = [0];
-let opLastClick = false;
+let lastClick = "num";
 
 const numButtons = document.querySelectorAll("button.num")
 numButtons.forEach((button) => {
     button.addEventListener("click", () => {
         // Add pressed number to display
-        if (opLastClick) {
+        if (lastClick === "op" || lastClick === "equals") {
             display.innerText = "";
         }
         const num = button.innerText;
+
+        if (lastClick === "equals") {
+            numbers = [num];
+        }
+
         if (display.innerText === "0") {
             display.innerText = num;
         } else {
@@ -41,14 +46,14 @@ numButtons.forEach((button) => {
         // Store latest operator
         operator = document.querySelector("button.highlighted").innerText;
 
-        opLastClick = false;
+        lastClick = "num";
     })
 })
 
 const opButtons = document.querySelectorAll("button.operand");
 opButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        if (!opLastClick) {
+        if (lastClick === "num") {
             // Add display number to numbers array
             const displayNum = display.innerText;
             if (numbers[0] === 0 && numbers.length === 1) {
@@ -76,7 +81,7 @@ opButtons.forEach((button) => {
             button.classList.add("highlighted");
         }
 
-        opLastClick = true;
+        lastClick = "op";
     })
 })
 
@@ -104,7 +109,7 @@ equals.addEventListener("click", () => {
         const highlightedButton = document.querySelector("button.highlighted");
         highlightedButton.classList.remove("highlighted");
         operator = null;
-        opLastClick = true;
+        lastClick = "equals";
     }
 })
 
@@ -113,7 +118,7 @@ clear.addEventListener("click", () => {
     display.innerText = "0";
     numbers = [0];
     operator = null;
-    opLastClick = false;
+    lastClick = "num";
     const highlightedButton = document.querySelector("button.highlighted");
     highlightedButton.classList.remove("highlighted");
 })
